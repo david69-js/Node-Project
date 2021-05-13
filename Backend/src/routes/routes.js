@@ -16,6 +16,7 @@ app.delete('/delete-user/:id', validateToken, UserController.deleteUser);
 
 //Task 
 app.post('/add-task', validateToken, TaskController.createTask);
+app.get('/get-task/:id', validateToken, TaskController.getTask)
 app.put('/update-task/:id', validateToken, TaskController.updateTask);
 app.delete('/delete-task/:id', validateToken, TaskController.deleteTask);
 

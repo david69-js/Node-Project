@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const Controller = {
     register: async (req, res) =>{
+      try{
         const {name, email, password } = req.body;
         const user = new User({_id: new mongoose.Types.ObjectId(), name, email, password});
        await user.save( (err, saveUser) =>{
@@ -12,9 +13,13 @@ const Controller = {
             const accessToken = generateAccessToken(user._id)
             res.status(200).json({accessToken})
        }) ;
+      }catch(err){
+          console.log(err);
+        }
     },
     login: async (req, res) =>{
-        const {email, password} = req.body;
+        try{
+            const {email, password} = req.body;
         const accessToken = generateAccessToken(User._id)
         await User.findOne({email}, (err, user)  =>{
             if (err) return res.status(500).send('Failed to authentecate user');
@@ -26,22 +31,33 @@ const Controller = {
                             return res.status(500).send('User and/or Inconrrect password')
             }) 
         });
+        }catch(err){
+            console.log(err);
+        }
     },
     getUsers: async (req, res) =>{
-      await User.find({}).populate('tasks', {userId:0,completed:0}).exec((err, allUser) =>{
-        if(err) return res.status(500).send({message: "An error has occurred"});
-        if(!allUser) return res.status(404).send({message: "404 users not founds"});
-        return res.status(200).send({response: 'success', allUser})  
-      })
+     try{
+        await User.find({}).populate('tasks', {userId:0,completed:0}).exec((err, allUser) =>{
+            if(err) return res.status(500).send({message: "An error has occurred"});
+            if(!allUser) return res.status(404).send({message: "404 users not founds"});
+            return res.status(200).send({response: 'success', allUser})  
+          })
+     }catch(err){
+         console.log(err);
+     }
         
     },
     deleteUser: async (req, res) =>{
+      try{
         let taskId = req.params.id;
         Task.findOneAndRemove(taskId, (err, userDelete) =>{
             if(err) return res.status(500).send({message: "An error has occurred"});
             if(!userDelete) return res.status(404).send({message: "Error 404 todo not found"});
             return res.status(200).send({response: 'success',userDelete})
         })
+      }catch(err){
+          console.log(err);
+      }
     },
     getUser: (req, res) =>{
         let userId = req.params.id;     
