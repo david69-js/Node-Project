@@ -5,22 +5,20 @@ background:white;
 border-bottom:3px solid #d3d3d3;
   margin-bottom: 20px;
   top:0;
-  padding:0rem 2rem  0rem 2rem ;
   height: 3.5rem;
   width: 100%;
-  max-width: 960;
   display: flex;
   position: fixed;
   z-index: 100;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   a {
     height: 100%;
     font-size: 1rem;
   }
   & ul {
     list-style: none;
-    width:90%;
+    width:80%;
     margin: 0;
     display: flex;
     justify-content: space-between;
@@ -53,7 +51,7 @@ export const Container = styled.div`
   align-items: center;
   `;
 
-export const ContainerForm = styled.div`
+export const ContainerForm = styled.form`
     background-color: white;
     box-shadow: 0 2px 3px rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 10%);
     max-width:350px;
@@ -83,7 +81,7 @@ export const Input = styled.input`
     border-color: #dbdbdb;
     color: #363636;
     box-shadow: inset 0 1px 2px rgb(10 10 10 / 10%);
-    width: 100%;
+    width: 94%;
     margin-bottom: 0.5em;
     &:focus {
         outline: 4px auto #4fa4f5;
@@ -107,6 +105,9 @@ export const Button = styled.button`
     text-align: center;
     white-space: nowrap;
     border-radius: 0.4rem;
+    :disabled{
+      background: #b3b3b3;
+    }
 `;
 
 export const Message = styled.label`

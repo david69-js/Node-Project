@@ -11,7 +11,7 @@ const Controller = {
             if(err) return res.status(500).send({message: 'An error has occurred'});
             if(!saveUser) return res.status(404).send({message: 'Error, 404 not saving'});
             const accessToken = generateAccessToken(user._id)
-            res.status(200).json({accessToken})
+           return res.status(200).json({accessToken, message: 'success', user: user._id, auth: true})
        }) ;
       }catch(err){
           console.log(err);
@@ -19,16 +19,16 @@ const Controller = {
     },
     login: async (req, res) =>{
         try{
-            const {email, password} = req.body;
+        const {email, password} = req.body;
         const accessToken = generateAccessToken(User._id)
         await User.findOne({email}, (err, user)  =>{
-            if (err) return res.status(500).send('Failed to authentecate user');
-            if(!user) return res.status(500).send('500 user not found');
+            if (err) return res.status(500).send({message: 'Failed to authentecate user'});
+            if(!user) return res.status(404).send({message: 'failed'});
             
-            user.isCorrectPassword(password, (err, result ) =>{
-                if(err) return res.status(500).send('Authentication error');
-                if(result) return  res.status(200).json({accessToken})
-                            return res.status(500).send('User and/or Inconrrect password')
+            return user.isCorrectPassword(password, (err, result ) =>{
+                if(err) return res.status(500).send({message: 'Authentication error'});
+                if(!result) return res.status(404).send({message: 'failed'})
+                return  res.status(200).json({accessToken, message:'success', user: user._id, auth: true})
             }) 
         });
         }catch(err){
