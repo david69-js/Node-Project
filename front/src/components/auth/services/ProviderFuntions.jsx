@@ -1,5 +1,5 @@
 export const SendAndRegisterUser = (data, Redirectuser, ErrorRedirect) => {
-    fetch('http://localhost:5000/api/register', {
+    fetch('https://backend-course.herokuapp.com/api/register', {
         method: 'POST',
         headers: { "Content-type": "application/json" },
         credentials: 'include',
@@ -15,7 +15,7 @@ export const SendAndRegisterUser = (data, Redirectuser, ErrorRedirect) => {
 }
 
 export const loginUser = (data, Redirectuser, ErrorRedirect) => {
-    fetch('http://localhost:5000/api/login', {
+    fetch('https://backend-course.herokuapp.com/api/login', {
         method: 'POST',
         headers: { "Content-type": "application/json" },
         credentials: 'include',
