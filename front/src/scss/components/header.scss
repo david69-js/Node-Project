@@ -1,0 +1,12 @@
+.navbar__link {
+   padding:4px 5px;
+}
+.active{
+    border: 1px solid gray;
+}
+.disable-link{
+    color: currentColor;
+    cursor: not-allowed;
+    text-decoration: none;
+    pointer-events: none;
+}
