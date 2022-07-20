@@ -50,8 +50,16 @@ const Controller = {
         if(err) return res.status(500).send({message: "An error has occurred"});
         if(!taskDelete) return res.status(404).send({message: "Error 404 task not found"});
         return res.status(200).send({response: 'success',taskDelete})
-    })
-    
-}
+        })    
+    },
+    // deleteManyTaks: async (req, res) =>{
+    //     let contain = req.params.contain;
+
+    //     Task.find(task, (err, task) =>{
+    //         if(err) return res.status(500).send({message: "An error has occurred"});
+    //         if(!task) return res.status(404).send({message: "Error 404 task not found"});
+    //         return res.status(200).send({response: 'success',task})
+    //     });
+    // }
 }
 module.exports = Controller;

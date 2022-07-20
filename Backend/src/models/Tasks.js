@@ -6,7 +6,7 @@ const modelTasks = Schema({
     task: {require: true, type: String},
     description: String,
     completed: Boolean,
-    userId: {type: Schema.ObjectId, ref: 'User'}
+    userId: {type: Schema.ObjectId, ref: 'User',require: true}
 },{
     timestamps: true
 })

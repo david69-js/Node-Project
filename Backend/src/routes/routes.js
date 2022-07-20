@@ -19,10 +19,11 @@ app.post('/add-task', validateToken, TaskController.createTask);
 app.get('/get-task/:id', validateToken, TaskController.getTask)
 app.put('/update-task/:id', validateToken, TaskController.updateTask);
 app.delete('/delete-task/:id', validateToken, TaskController.deleteTask);
+//app.get('/delete-many/', TaskController.deleteManyTaks);
 
 
 //Getdata
 app.get('/get-users', UserController.getUsers);
-app.get('/get-tasks', TaskController.getTasks);
+app.get('/get-tasks',  TaskController.getTasks);
 app.get('/private-task', validateToken, UserController.private)
 module.exports = app;

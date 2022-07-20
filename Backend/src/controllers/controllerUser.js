@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Tasks = require('../models/Tasks');
 const { generateAccessToken } = require('../jwt/jwt')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -49,11 +50,18 @@ const Controller = {
     },
     deleteUser: async (req, res) =>{
       try{
-        let taskId = req.params.id;
-        Task.findOneAndRemove(taskId, (err, userDelete) =>{
+        let userId = req.params.id;
+        await User.findByIdAndRemove(userId, (err, userDelete) =>{
             if(err) return res.status(500).send({message: "An error has occurred"});
-            if(!userDelete) return res.status(404).send({message: "Error 404 todo not found"});
-            return res.status(200).send({response: 'success',userDelete})
+            if(!userDelete) return res.status(404).send({message: "Error 404 user not found"});
+           if(userDelete) {
+                Tasks.deleteMany({
+                    userId:{
+                        _id: userId
+                    }
+                })
+                res.status(200).send({response: 'success'}) 
+            }
         })
       }catch(err){
           console.log(err);
